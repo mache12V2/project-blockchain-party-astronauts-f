@@ -9,8 +9,6 @@
 #include <vector>
 #include "Nodeavl.h"
 #include "blockchain.h"
-#include "avltree.h"
-#include "Dataset.h"
 
 
 template <class T, class A>

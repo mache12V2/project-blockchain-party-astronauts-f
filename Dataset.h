@@ -4,10 +4,11 @@
 #include "Trainer.h"
 #include <iostream>
 
-//unsigned namespace std;
+using namespace std;
 
 
 class DataSet {
+
     BlockChain<vector<Pokemon>>* intercambios;
     AVlTree<Pokemon, NodeBc<vector<Pokemon>>*>* transacciontree;
     vector<Pokemon> block;
