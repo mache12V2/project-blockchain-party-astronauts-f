@@ -92,7 +92,7 @@ public:
             if (block.size() == 10) {
                 intercambios->insert(getInfo, block);
 
-                for (int i = 0; i < 6; ++i) {
+                for (int i = 0; i < 10; ++i) {
                     transacciontree->insert(block.at(i), intercambios->getNE());
 
                 }
@@ -154,6 +154,10 @@ public:
 
         int numero,vida,totalstats,ataque,defensa,ataque_sp,defensa_sp,velocidad,generacion, menu;
         string nombre,tipo_1,tipo_2,trainer,poke;
+        string letra;
+        int i=0;
+        string tipo_principal;
+        string tipo_secundario;
         vector<Pokemon> team;
         vector<Pokemon> stock;
         vector<Pokemon> changes;
@@ -173,14 +177,12 @@ public:
         auto compare1 = [](Pokemon a, Pokemon b)->bool {
             return a == b;
         };
-
         auto compare2 = [](Pokemon a, Pokemon b)->bool {
             if (a.getName()[0] == b.getName()[0]) {
                 return true;
             }
             else return false;
         };
-
         auto compare3 = [](Pokemon a, Pokemon b)->bool {
 
             if (a.getName()[a.getName().length() - 1] == b.getName()[0]) {
@@ -188,10 +190,9 @@ public:
             }
             else return false;
         };
-
         auto compare4 = [](Pokemon a, Pokemon b)->bool {
 
-            if (a.getName() == b.getName()) {
+            if (a.getType_1() == b.getType_1()) {
                 return true;
             }
             else return false;
@@ -210,7 +211,6 @@ public:
             }
             else return false;
         };
-
         auto compare7 = [](Pokemon a, Pokemon b)->bool {
 
             if (a.getName() == b.getName()) {
@@ -218,6 +218,7 @@ public:
             }
             else return false;
         };
+        
 
         do {
             do {
@@ -225,7 +226,12 @@ public:
                 cout << "1.Retirar un pokemon del pc\n";
                 cout << "2.Depositar un pokemon en el pc\n";
                 cout << "3.Revisar equipo pokemon\n";
-                cout << "4.Salir\n";
+                cout << "\n--Filtrado de datos--\n";
+                cout << "\n4.Inicia con\n";
+                cout << "5.Finaliza con\n";
+                cout << "6.Esta contenido en\n";
+                cout << "7.No esta contenido en\n";
+                cout << "10.Salir\n";
                 cin >> menu;
 
                 system("cls");
@@ -238,40 +244,125 @@ public:
 
             case 1:
                 cout << "--Menu PC--\n";
-                cout << "Ingrese el nombre del pokemon que desea retirar:"; cin >> nombre;
-
+                cout << "Ingrese el nombre del pokemon que desea retirar: "; cin >> nombre;
+                
                  if (team.size() <=5) {
-                    team.push_back(Pokemon(0 ,nombre,"","",0,0,0,0,0,0,0));
-                    cout << "El Pokemon se ha ingresado a su equipo\n";
+                    search = Pokemon(0,nombre,"","",0,0,0,0,0,0,0);
+                    transacciontree->_find(search, stock, compare1);
+                    
+                    team.push_back(stock.at(i));
+                    i++;
+                    
                 } 
                 else if (team.size() == 6) {
 
                     cout << "Solo puedes llevar 6 pokemones al mismo tiempo\n";
 
-                }; break; 
+                }
+                break; 
 
             case 2:
-                if (team.size() == 0) {cout << "No tiene ningun pokemon en su equipo para depositar";}
-                else {
+
                 cout << "--Menu PC--/n";
-                cout << "Ingrese el nombre del pokemon que desea depositar"; cin >> nombre;
-                
+                cout << "Ingrese el nombre del pokemon que desea depositar: "; cin >> nombre;
+                search = Pokemon(0,nombre,"","",0,0,0,0,0,0,0);
+                transacciontree->_find(search, stock, compare1);
+
+                for(int i=0; i<team.size(); i++){
+                    if(stock.at(i) == team.at(i)){
+                        team.erase(team.begin() + i);
+                    }
                 }
-                ; break; 
+                i--;
+
+                break; 
 
             case 3:
-                cout << "--Menu PC--\n"; 
+                cout << "--Menu PC--/n";
                 if (team.size() == 0) {cout << "No tiene ningun pokemon en su equipo";}
                 else {
-                cout << "Su equipo pokemon es: \n";
+                cout << "Su equipo pokemon es:\n";
                 for(int i = 0 ; i < team.size();++i){
                     cout << team.at(i)<< "\n";
                 }
-                }
+                
+                }           
+                break;
             case 4:
-                 break;
+                cout << "Incia con\n";
+                cout << "Ingrese la letra del inicio del pokemon: "; cin >>letra;
+                search = Pokemon(0, letra, "", "", 0,0,0,0,0,0,0);
+                transacciontree->_find(search, stock, compare2);
+
+                if(stock.size() == 0){
+                    cout<<"No se encontro coincidencias\n";
+                }
+                else {
+                    for(int i=0; i<stock.size(); i++){
+                        cout << stock.at(i) << endl;
+                    }
+                }
+                stock.clear();
+
+                break;
+
+            case 5:
+                cout << "Finaliza con\n";
+                cout << "Ingrese la letra de fin del pokemon: "; cin >> letra;
+                search = Pokemon(0, letra, "", "", 0,0,0,0,0,0,0);
+                transacciontree->_find(search,stock,compare3);
+
+                if (stock.size() == 0) {
+                    cout << "No se encontro coincidencias\n";
+                }
+                else {
+                    for (int i = 0; i < stock.size(); ++i) {
+                        cout << stock.at(i) << endl;
+                    }
+                }
+                stock.clear();
+
+                break;
+
+            case 6:
+                cout << "Esta contenido en \n";
+                cout << "Ingrese el tipo principal de pokemon: "; cin >> tipo_principal;
+                search = Pokemon(0, "", tipo_principal, "", 0,0,0,0,0,0,0);
+                transacciontree->_find(search, stock, compare4);
+
+                if (stock.size() == 0) {
+
+                    cout << "No se encontro el tipo de pokemon\n";
+                }
+                else {
+                    cout << "Los siguientes pokemones estan pertenecen al tipo " << tipo_principal <<": \n";
+                    for (int i = 0; i < stock.size(); ++i) {
+                        cout << stock.at(i) << endl;
+                    }
+                }
+                stock.clear();
+
+                break;
+            case 7: 
+                cout << "No esta contenido en\n";
+                cout << "Ingrese el tipo secundario de pokemon: "; cin>> tipo_secundario;
+                search = Pokemon(0, "", tipo_secundario, "", 0,0,0,0,0,0,0);
+                transacciontree->_find(search, stock, compare5);
+
+                cout << "Los siguientes pokemones no pertenecen al tipo secundario " << tipo_secundario << ": \n";
+                for (int i = 0; i < stock.size(); ++i) {
+                    cout << stock.at(i) << endl;
+                }
+                stock.clear();
+                
+                break;
+
+            case 10:
+
+
+                break;
             }
-        } while (menu != 4);
+        } while (menu != 9);
 
     }
             

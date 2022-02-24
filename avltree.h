@@ -71,7 +71,6 @@ private:
 			cd = _cantidad(nodo->der);
 			return 1 + ci + cd;	
 		}
-
 	} */
 	 
 	void RotateRight(NodeAVL<T, A>*& thnode) {
@@ -151,7 +150,7 @@ public:
 		root  = nullptr;
 	}
 
-	void find(T data, vector<T>& stock, function<bool(T, T)> compare) {
+	void _find(T data, vector<T>& stock, function<bool(T, T)> compare) {
 		find(root, data, stock, compare);
 	}
 
