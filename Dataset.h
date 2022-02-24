@@ -260,7 +260,7 @@ public:
                 ; break; 
 
             case 3:
-                cout << "--Menu PC--\n";
+                cout << "--Menu PC--\n"; 
                 if (team.size() == 0) {cout << "No tiene ningun pokemon en su equipo";}
                 else {
                 cout << "Su equipo pokemon es: \n";
