@@ -8,6 +8,7 @@
 #include <cstdlib>
 #include <vector>
 #include <math.h>
+#include <ctime>
 #include "nodebc.h"
 
 using namespace std;
