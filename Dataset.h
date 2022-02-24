@@ -92,7 +92,7 @@ public:
             if (block.size() == 10) {
                 intercambios->insert(getInfo, block);
 
-                for (int i = 0; i < 10; ++i) {
+                for (int i = 0; i < 6; ++i) {
                     transacciontree->insert(block.at(i), intercambios->getNE());
 
                 }
@@ -158,7 +158,7 @@ public:
         vector<Pokemon> stock;
         vector<Pokemon> changes;
         Pokemon search;
-        //Lambda
+        
         auto getInfo = [](vector<Pokemon> a)->string {
             string info = "";
 
@@ -241,7 +241,7 @@ public:
                 cout << "Ingrese el nombre del pokemon que desea retirar:"; cin >> nombre;
 
                  if (team.size() <=5) {
-                    team.push_back(Pokemon(0,nombre,"","",0,0,0,0,0,0,0));
+                    team.push_back(Pokemon(0 ,nombre,"","",0,0,0,0,0,0,0));
                     cout << "El Pokemon se ha ingresado a su equipo\n";
                 } 
                 else if (team.size() == 6) {
@@ -251,26 +251,27 @@ public:
                 }; break; 
 
             case 2:
-
+                if (team.size() == 0) {cout << "No tiene ningun pokemon en su equipo para depositar";}
+                else {
                 cout << "--Menu PC--/n";
                 cout << "Ingrese el nombre del pokemon que desea depositar"; cin >> nombre;
+                
+                }
                 ; break; 
 
             case 3:
-                cout << "--Menu PC--/n";
+                cout << "--Menu PC--\n";
                 if (team.size() == 0) {cout << "No tiene ningun pokemon en su equipo";}
                 else {
-                cout << "Su equipo pokemon es";
+                cout << "Su equipo pokemon es: \n";
                 for(int i = 0 ; i < team.size();++i){
                     cout << team.at(i)<< "\n";
                 }
                 }
             case 4:
-
-
-                ; break;
+                 break;
             }
-        } while (menu != 9);
+        } while (menu != 4);
 
     }
             

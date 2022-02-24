@@ -10,7 +10,7 @@ class Pokemon {
     int number,total,hp,attack,defense,special_atk,special_def,speed,gen;
 
 public:
-    Pokemon(int number = 0 , string name = "", string type_1 = "", string type_2 = " ", int total = 0, int hp = 0, int attack = 0, int defense = 0, int special_atk = 0, int special_def = 0, int gen = 0) {
+    Pokemon(int number = 0 , string name = "", string type_1 = "", string type_2 = " ", int total = 0, int hp = 0, int attack = 0, int defense = 0, int special_atk = 0, int special_def = 0,int speed = 0, int gen = 0) {
         this->number = number;
         this->name = name;
         this->type_1 = type_1;
