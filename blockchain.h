@@ -10,6 +10,7 @@
 #include <math.h>
 #include "nodebc.h"
 
+using namespace std;
 
 template <class T>
 class BlockChain {

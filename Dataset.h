@@ -257,11 +257,13 @@ public:
 
             case 3:
                 cout << "--Menu PC--/n";
+                if (team.size() == 0) {cout << "No tiene ningun pokemon en su equipo";}
+                else {
                 cout << "Su equipo pokemon es";
                 for(int i = 0 ; i < team.size();++i){
                     cout << team.at(i)<< "\n";
                 }
-            
+                }
             case 4:
 
 

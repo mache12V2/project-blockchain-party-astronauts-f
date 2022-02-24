@@ -17,7 +17,7 @@ public:
 
 	}
 	static int heighti(NodeAVL<T, A>* n) {
-		return n == nullptr ? -1 : n->h;
+		return n == nullptr ? -1 : n->height;
 	}
 	void NewHeight() {
 		height = max(heighti(right),heighti(left));
