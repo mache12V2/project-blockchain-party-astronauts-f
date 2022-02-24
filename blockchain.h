@@ -33,32 +33,33 @@ public:
 
 
 	string Hashfunction(T v, function<string(T)> getInfo, string prevhash = "") {
-	   
-
+	   srand(time(NULL));
+		int seed = rand()%100;
+		int factor = rand()%6 + 2; 
 		string data = getInfo(v);
-		string half = "", quarter = "";
+		string hash = "", prevh = "";
 
 
-		for (int i = 0; i < data.length() / 4; ++i) {
+		for (int i = 0; i < data.length()/factor; ++i) {
 
-			half = half + data[i];
+			hash = hash + data[i];
 		}
 
-		long long n = stoll(half);
+		long long hog = stoll(hash);
 
 		if (prevhash != "") {
-			for (int i = 0; i < prevhash.length() / 8; ++i) {
+			for (int i = 0; i < prevhash.length() / factor; ++i) {
 
-				quarter = quarter + prevhash[i];
+				prevh = prevh + prevhash[i];
 			}
-			long m = stol(quarter);
+			long long phog = stol(prevh);
 
-			n = n + m;
+			phog = phog + hog;
 		}
 
-		n = n * M_PI;
+		hog = hog * seed; 
 
-		return to_string(n) + to_string(data.length());
+		return to_string(hog) + to_string(data.length());
 
 	}
 
